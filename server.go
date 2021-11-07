@@ -35,6 +35,7 @@ func getTLSConfig(cfg ServerConfig) (*tls.Config, error) {
 
 	cer, err := tls.LoadX509KeyPair(cfg.CertFile, cfg.KeyFile)
 	if err != nil {
+		fmt.Println("Error in loading pair...")
 		return &tls.Config{MinVersion: tls.VersionTLS12}, os.ErrNotExist
 	}
 
@@ -43,6 +44,7 @@ func getTLSConfig(cfg ServerConfig) (*tls.Config, error) {
 	// read rootCA file into byte
 	f, err := os.Open(cfg.RootCA)
 	if err != nil {
+		fmt.Println("Error in opening root CA..")
 		return &tls.Config{MinVersion: tls.VersionTLS12}, os.ErrNotExist
 	}
 
